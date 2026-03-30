@@ -1,0 +1,32 @@
+buildscript {
+    repositories { mavenCentral() }
+    dependencies {
+        classpath 'org.flywaydb:flyway-database-postgresql:11.7.2'
+        classpath 'org.postgresql:postgresql:42.7.5'
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'org.flywaydb.flyway' version '11.7.2'
+}
+
+group = 'com.inboxintelligence'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Flyway Gradle plugin config — for standalone CLI usage
+flyway {
+    url = System.getenv('DB_URL') ?: 'jdbc:postgresql://localhost:5432/ingester'
+    user = System.getenv('DB_USER') ?: 'inboxuser'
+    password = System.getenv('DB_PASSWORD') ?: 'inboxpass'
+}
