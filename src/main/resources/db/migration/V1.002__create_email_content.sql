@@ -24,6 +24,7 @@ CREATE TABLE email_content (
     body_content_path VARCHAR(1024),
     body_html_content_path VARCHAR(1024),
     processed_content_path VARCHAR(1024),
+    cleaned_content_path VARCHAR(1024),
 
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
