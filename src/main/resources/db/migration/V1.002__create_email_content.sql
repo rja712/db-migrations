@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS vector;
+
 CREATE TABLE email_content (
 
     id BIGSERIAL PRIMARY KEY,
@@ -26,6 +28,10 @@ CREATE TABLE email_content (
     processed_content_path VARCHAR(1024),
     cleaned_content_path VARCHAR(1024),
 
+    -- embeddings
+    embedding       vector(768),
+    embedding_model VARCHAR(64),
+
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
@@ -42,4 +48,10 @@ CREATE TABLE email_content (
 CREATE INDEX idx_inbox_mailbox ON email_content (fk_gmail_mailbox_id);
 CREATE INDEX idx_inbox_thread ON email_content (thread_id);
 CREATE INDEX idx_inbox_parent ON email_content (parent_message_id);
+
+CREATE INDEX idx_email_content_embedding
+    ON email_content
+    USING ivfflat (embedding vector_cosine_ops)
+    WITH (lists = 100)
+    WHERE embedding IS NOT NULL;
 

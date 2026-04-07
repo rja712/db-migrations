@@ -11,8 +11,8 @@ plugins {
 }
 
 flyway {
-    url = System.getenv('DB_URL') ?: 'jdbc:postgresql://localhost:5432/inbox-intelligence'
-    user = System.getenv('DB_USER') ?: 'inboxuser'
-    password = System.getenv('DB_PASSWORD') ?: 'inboxpass'
+    url = System.getenv('DB_URL')
+    user = System.getenv('DB_USER')
+    password = System.getenv('DB_PASSWORD')
     cleanDisabled = false
 }
