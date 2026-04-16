@@ -25,8 +25,7 @@ CREATE TABLE email_content (
     raw_message_path VARCHAR(1024),
     body_content_path VARCHAR(1024),
     body_html_content_path VARCHAR(1024),
-    processed_content_path VARCHAR(1024),
-    cleaned_content_path VARCHAR(1024),
+    sanitized_content_path VARCHAR(1024),
 
     -- embeddings
     embedding       vector(768),
