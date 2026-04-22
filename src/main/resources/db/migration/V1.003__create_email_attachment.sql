@@ -6,27 +6,26 @@ CREATE TABLE email_attachment (
 
     -- gmail metadata
     email_attachment_id VARCHAR(1024),
-    file_name VARCHAR(1024) NOT NULL,
-    mime_type VARCHAR(255),
-    size_in_bytes BIGINT,
+    file_name           VARCHAR(1024) NOT NULL,
+    mime_type           VARCHAR(255),
+    size_in_bytes       BIGINT,
 
     -- storage
-    storage_path VARCHAR(1024) NOT NULL,
-    storage_provider VARCHAR(8) NOT NULL DEFAULT 'local',
+    storage_path     VARCHAR(1024) NOT NULL,
+    storage_provider VARCHAR(8)    NOT NULL DEFAULT 'local',
 
-    -- inline correlation (maps to cid: references in body HTML)
+    -- inline reference (maps to cid: in HTML body)
     content_id VARCHAR(1024),
-
-    -- processing
-    is_inline BOOLEAN NOT NULL DEFAULT FALSE,
+    is_inline  BOOLEAN NOT NULL DEFAULT FALSE,
 
     -- audit
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
-    CONSTRAINT fk_gmail_email_attachment_inbox
-            FOREIGN KEY (fk_email_content_id)
-            REFERENCES email_content(id)
-            ON DELETE CASCADE
+    CONSTRAINT fk_email_attachment_email_content
+        FOREIGN KEY (fk_email_content_id)
+        REFERENCES email_content(id)
+        ON DELETE CASCADE
 );
 
-CREATE INDEX idx_inbox_attachment ON email_attachment(fk_email_content_id);
+CREATE INDEX idx_email_attachment_email_content
+    ON email_attachment (fk_email_content_id);
