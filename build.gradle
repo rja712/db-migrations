@@ -14,5 +14,5 @@ flyway {
     url      = "jdbc:postgresql://${System.getenv('DB_HOST')}:${System.getenv('DB_PORT')}/${System.getenv('DB_NAME')}"
     user     = System.getenv('DB_USERNAME')
     password = System.getenv('DB_PASSWORD')
-    cleanDisabled = true
+    cleanDisabled = false
 }
