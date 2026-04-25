@@ -27,5 +27,4 @@ CREATE INDEX idx_cluster_mailbox
 
 CREATE INDEX idx_cluster_centroid
     ON cluster
-    USING ivfflat (centroid vector_cosine_ops)
-    WITH (lists = 10);
+    USING hnsw (centroid vector_cosine_ops);

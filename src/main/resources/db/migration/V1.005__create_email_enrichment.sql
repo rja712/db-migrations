@@ -10,8 +10,8 @@ CREATE TABLE email_enrichments (
 
     -- cluster assignment
     fk_cluster_id           BIGINT,
-    cluster_probability     FLOAT,       -- HDBSCAN soft membership score (0.0–1.0)
-    cluster_assignment_type VARCHAR(16), -- BATCH | INCREMENTAL
+    cluster_probability     DOUBLE PRECISION,
+    cluster_assignment_type VARCHAR(16),
 
     -- audit
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -39,6 +39,5 @@ CREATE INDEX idx_email_enrichments_cluster
 
 CREATE INDEX idx_email_enrichments_embedding
     ON email_enrichments
-    USING ivfflat (embedding vector_cosine_ops)
-    WITH (lists = 100)
+    USING hnsw (embedding vector_cosine_ops)
     WHERE embedding IS NOT NULL;

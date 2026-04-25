@@ -20,7 +20,7 @@ CREATE TABLE email_content (
     received_at  TIMESTAMPTZ,
 
     -- processing
-    processed_status VARCHAR(32)  NOT NULL DEFAULT 'RECEIVED',
+    processed_status VARCHAR(32)  NOT NULL DEFAULT 'EMAIL_RECEIVED',
     processing_note  VARCHAR(512),
 
     -- storage paths
@@ -50,3 +50,6 @@ CREATE INDEX idx_email_content_thread
 
 CREATE INDEX idx_email_content_parent
     ON email_content (parent_message_id);
+
+CREATE INDEX idx_email_content_mailbox_status
+    ON email_content (fk_gmail_mailbox_id, processed_status);
