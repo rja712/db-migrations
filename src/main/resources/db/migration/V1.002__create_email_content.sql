@@ -29,6 +29,8 @@ CREATE TABLE email_content (
     body_html_content_path  VARCHAR(1024),
     sanitized_content_path  VARCHAR(1024),
 
+    origin VARCHAR(16), -- Pub/SUb or Backfill
+
     -- audit
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
