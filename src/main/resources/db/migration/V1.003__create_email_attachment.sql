@@ -11,7 +11,7 @@ CREATE TABLE email_attachment (
     size_in_bytes       BIGINT,
 
     -- storage
-    storage_path     VARCHAR(1024) NOT NULL,
+    storage_path     VARCHAR(1024),
     storage_provider VARCHAR(8)    NOT NULL DEFAULT 'local',
 
     -- inline reference (maps to cid: in HTML body)
