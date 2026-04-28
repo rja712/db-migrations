@@ -10,7 +10,6 @@ CREATE TABLE label (
     description TEXT,
 
     reference_embedding vector(768),
-    confidence_score DOUBLE PRECISION,
 
     is_active BOOLEAN NOT NULL DEFAULT TRUE,
 
