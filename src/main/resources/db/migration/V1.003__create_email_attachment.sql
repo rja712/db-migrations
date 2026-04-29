@@ -12,7 +12,7 @@ CREATE TABLE email_attachment (
 
     -- storage
     storage_path     VARCHAR(1024),
-    storage_provider VARCHAR(8)    NOT NULL DEFAULT 'local',
+    storage_provider VARCHAR(64)   NOT NULL DEFAULT 'local',
 
     -- inline reference (maps to cid: in HTML body)
     content_id VARCHAR(1024),
